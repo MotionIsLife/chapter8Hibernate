@@ -17,6 +17,7 @@ public class Contact implements Serializable {
     private String lastName;
     private Date birthDate;
     private Set<ContactTelDetail> contactTelDetails = new HashSet<ContactTelDetail>();
+    private Set<Hobby> hobbies = new HashSet<Hobby>();
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -83,6 +84,17 @@ public class Contact implements Serializable {
 
     public void removalContactTelDetail(ContactTelDetail contactTelDetail) {
         getContactTelDetails().remove(contactTelDetail);
+    }
+
+    @ManyToMany
+    @JoinTable(name = "contact_hobby_detail", joinColumns = @JoinColumn(name = "CONTACT_ID"),
+                inverseJoinColumns = @JoinColumn(name = "HOBBY_ID"))
+    public Set<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(Set<Hobby> hobbies) {
+        this.hobbies = hobbies;
     }
 
     @Override
