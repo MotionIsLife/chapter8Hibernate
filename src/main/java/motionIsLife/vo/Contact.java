@@ -10,6 +10,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "contact")
+@NamedQueries({
+        @NamedQuery(name = "Contact.findAllWithDetail",
+        query = "select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h")
+})
 public class Contact implements Serializable {
     private Long id;
     private int version;

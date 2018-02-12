@@ -29,8 +29,9 @@ public class ContactDaoImpl implements ContactDao {
         return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
     }
     @Override
+    @Transactional(readOnly = true)
     public List<Contact> findAllWithDetail() {
-        return null;
+        return sessionFactory.getCurrentSession().getNamedQuery("Contact.findAllWithDetail").list();
     }
     @Override
     public Contact findById(Long id) {

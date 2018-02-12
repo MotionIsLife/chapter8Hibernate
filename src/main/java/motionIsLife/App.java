@@ -14,7 +14,7 @@ public class App {
         ctx.load("classpath:app-context-annotation.xml");
         ctx.refresh();
         ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
-        listContactsWithDetail(contactDao.findAll());
+        listContactsWithDetail(contactDao.findAllWithDetail());
     }
 
     private static void listContactsWithDetail(List<Contact> contacts) {
