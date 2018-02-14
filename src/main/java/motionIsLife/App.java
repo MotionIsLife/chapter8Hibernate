@@ -6,8 +6,8 @@ import motionIsLife.vo.ContactTelDetail;
 import motionIsLife.vo.Hobby;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -15,16 +15,8 @@ public class App {
         ctx.load("classpath:app-context-annotation.xml");
         ctx.refresh();
         ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
-        Contact contact = new Contact();
-        contact.setBirthDate(new Date());
-        contact.setFirstName("Mickael");
-        contact.setLastName("Jackson");
-
-        ContactTelDetail contactTelDetail = new ContactTelDetail("Home", "111111");
-        contact.addContactTelDetail(contactTelDetail);
-        contactTelDetail = new ContactTelDetail("Mobile", "222222");
-        contact.addContactTelDetail(contactTelDetail);
-        contactDao.save(contact);
+        Contact contact = contactDao.findById(1L);
+        contactDao.delete(contact);
         listContactsWithDetail(contactDao.findAllWithDetail());
     }
 
