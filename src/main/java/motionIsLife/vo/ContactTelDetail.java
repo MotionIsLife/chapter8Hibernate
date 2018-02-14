@@ -68,4 +68,15 @@ public class ContactTelDetail implements Serializable {
     public Contact getContact() {
         return contact;
     }
+
+    @Override
+    public String toString() {
+        return "ContactTelDetail{" +
+                "id=" + id +
+                ", version=" + version +
+                ", telType='" + telType + '\'' +
+                ", telNumber='" + telNumber + '\'' +
+                ", contact=" + contact +
+                '}';
+    }
 }

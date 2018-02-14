@@ -35,10 +35,12 @@ public class ContactDaoImpl implements ContactDao {
     }
     @Override
     public Contact findById(Long id) {
-        return null;
+        return (Contact) sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
     }
     @Override
     public Contact save(Contact contact) {
+        sessionFactory.getCurrentSession().saveOrUpdate(contact);
+        System.out.println("Contact saved with id: " + contact.getId());
         return null;
     }
     @Override
