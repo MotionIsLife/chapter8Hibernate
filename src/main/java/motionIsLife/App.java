@@ -1,20 +1,19 @@
 package motionIsLife;
 
-import motionIsLife.dao.ContactDao;
+import motionIsLife.dao.ContactService;
 import motionIsLife.vo.Contact;
 import motionIsLife.vo.ContactTelDetail;
 import motionIsLife.vo.Hobby;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.List;
-import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:app-context-annotation.xml");
         ctx.refresh();
-        ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
+        ContactService contactDao = ctx.getBean("contactDao", ContactService.class);
         Contact contact = contactDao.findById(1L);
         contactDao.delete(contact);
         listContactsWithDetail(contactDao.findAllWithDetail());

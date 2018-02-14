@@ -24,13 +24,17 @@
     </jdbc:embedded-database>
 
     <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-          p:sessionFactory-ref="sessionFactory" />
+          class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="emf" />
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
-        p:dataSource-ref="dataSource"
-        p:packagesToScan="motionIsLife"
-        p:hibernateProperties-ref="hibernateProperties"/>
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="packagesToScan" value="motionIsLife" />
+        <property name="jpaProperties" ref="hibernateProperties" />
+    </bean>
 
     <util:properties id="hibernateProperties">
         <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
@@ -40,6 +44,6 @@
         <prop key="hibernate.show_sql">true</prop>
     </util:properties>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:component-scan base-package="motionIsLife" />
 </beans>

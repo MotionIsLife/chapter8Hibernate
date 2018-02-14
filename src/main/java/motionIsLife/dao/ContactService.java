@@ -4,7 +4,7 @@ import motionIsLife.vo.Contact;
 
 import java.util.List;
 
-public interface ContactDao {
+public interface ContactService {
     List findAll();
     List<Contact> findAllWithDetail();
     Contact findById(Long id);
