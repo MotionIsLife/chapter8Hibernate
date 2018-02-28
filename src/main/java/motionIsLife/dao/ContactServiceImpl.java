@@ -19,17 +19,22 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List findAll() {
-        return null;
+        List<Contact> contacts = em.createNamedQuery("Contact.findAll", Contact.class).getResultList();
+        return contacts;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Contact> findAllWithDetail() {
-        return null;
+        List<Contact> contactsWithDetails = em.createNamedQuery("Contact.findAllWithDetail", Contact.class).getResultList();
+        return contactsWithDetails;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Contact findById(Long id) {
-        return null;
+        Contact contact = em.createNamedQuery("Contact.findById", Contact.class).setParameter("id", id).getSingleResult();
+        return contact;
     }
 
     @Override

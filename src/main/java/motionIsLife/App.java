@@ -1,6 +1,6 @@
 package motionIsLife;
 
-import motionIsLife.dao.ContactService;
+import motionIsLife.dao.ContactSummaryUntypeImpl;
 import motionIsLife.vo.Contact;
 import motionIsLife.vo.ContactTelDetail;
 import motionIsLife.vo.Hobby;
@@ -13,10 +13,8 @@ public class App {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:app-context-annotation.xml");
         ctx.refresh();
-        ContactService contactDao = ctx.getBean("contactDao", ContactService.class);
-        Contact contact = contactDao.findById(1L);
-        contactDao.delete(contact);
-        listContactsWithDetail(contactDao.findAllWithDetail());
+        ContactSummaryUntypeImpl contactSummaryUntypeImpl = ctx.getBean("contactSummaryUntype", ContactSummaryUntypeImpl.class);
+        contactSummaryUntypeImpl.displayAllContactSummary();
     }
 
     private static void getById(Contact contact) {

@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "contact")
 @NamedQueries({
-        @NamedQuery(name = "COntact.findAll",
+        @NamedQuery(name = "Contact.findAll",
             query = "select c from Contact c"),
         @NamedQuery(name = "Contact.findAllWithDetail",
             query = "select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h"),
