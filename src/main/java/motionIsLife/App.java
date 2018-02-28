@@ -15,14 +15,8 @@ public class App {
         ctx.refresh();
         ContactService contactService = ctx.getBean("jpaContactService", ContactService.class);
 
-        Contact contact = new Contact();
-        contact.setFirstName("Jorge");
-        contact.setLastName("Last");
-        contact.setBirthDate(new Date());
-        ContactTelDetail contactTelDetail = new ContactTelDetail("Home", "654654");
-        contact.addContactTelDetail(contactTelDetail);
-
-        contactService.save(contact);
+        Contact contact = contactService.findById(1L);
+        contactService.delete(contact);
         listContactsWithDetail(contactService.findAllWithDetail());
     }
 
