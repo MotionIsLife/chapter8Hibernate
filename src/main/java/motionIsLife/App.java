@@ -15,7 +15,7 @@ public class App {
         ctx.refresh();
         ContactService contactService = ctx.getBean("jpaContactService", ContactService.class);
 
-        List<Contact> contacts = contactService.findAllByNativeQuery();
+        List<Contact> contacts = contactService.findByCriteriaQuery("John", "Smith");
         for (Contact contact : contacts) {
             System.out.println(contact);
         }
