@@ -15,9 +15,10 @@ public class App {
         ctx.refresh();
         ContactService contactService = ctx.getBean("jpaContactService", ContactService.class);
 
-        Contact contact = contactService.findById(1L);
-        contactService.delete(contact);
-        listContactsWithDetail(contactService.findAllWithDetail());
+        List<Contact> contacts = contactService.findAllByNativeQuery();
+        for (Contact contact : contacts) {
+            System.out.println(contact);
+        }
     }
 
     private static void getById(Contact contact) {

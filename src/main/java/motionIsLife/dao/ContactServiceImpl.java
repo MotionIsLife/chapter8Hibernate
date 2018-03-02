@@ -17,6 +17,8 @@ public class ContactServiceImpl implements ContactService {
     @PersistenceContext
     private EntityManager em;
 
+    private final String ALL_CONTACT_NATIVE_QUERY = "select id, first_name, last_name, birth_date, version from contact";
+
     @Override
     public List findAll() {
         List<Contact> contacts = em.createNamedQuery("Contact.findAll", Contact.class).getResultList();
@@ -28,6 +30,12 @@ public class ContactServiceImpl implements ContactService {
     public List<Contact> findAllWithDetail() {
         List<Contact> contactsWithDetails = em.createNamedQuery("Contact.findAllWithDetail", Contact.class).getResultList();
         return contactsWithDetails;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Contact> findAllByNativeQuery() {
+        return em.createNativeQuery(ALL_CONTACT_NATIVE_QUERY, "contactResult").getResultList();
     }
 
     @Transactional(readOnly = true)

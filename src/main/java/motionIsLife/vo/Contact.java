@@ -18,6 +18,8 @@ import static javax.persistence.GenerationType.IDENTITY;
         @NamedQuery(name = "Contact.findById",
             query = "select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h where c.id = :id")
 })
+@SqlResultSetMapping(name = "contactResult",
+                     entities = @EntityResult(entityClass = Contact.class))
 public class Contact implements Serializable {
     private Long id;
     private int version;
