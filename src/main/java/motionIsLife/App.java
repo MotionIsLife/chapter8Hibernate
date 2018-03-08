@@ -13,9 +13,9 @@ public class App {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:app-context-annotation.xml");
         ctx.refresh();
-        ContactService contactService = ctx.getBean("jpaContactService", ContactService.class);
+        ContactService contactService = ctx.getBean("springJpaContactService", ContactService.class);
 
-        List<Contact> contacts = contactService.findByCriteriaQuery("John", "Smith");
+        List<Contact> contacts = contactService.findAll();
         for (Contact contact : contacts) {
             System.out.println(contact);
         }
