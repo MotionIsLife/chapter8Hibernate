@@ -1,39 +1,40 @@
 package motionIsLife.dao;
 
-import com.google.common.collect.Lists;
 import motionIsLife.vo.Contact;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-@Service("springJpaContactService")
+@Service("contactService")
 @Repository
 @Transactional
-
 public class ContactServiceImpl implements ContactService {
 
-    @Autowired
-    private ContactRepository contactRepository;
+    @Qualifier("emfA")
+    @PersistenceContext(unitName = "emfA")
+    private EntityManager emA;
 
-    @Transactional(readOnly = true)
-    @Override
-    public List<Contact> findAll() {
-        return Lists.newArrayList(contactRepository.findAll());
-    }
+    @Qualifier("emfB")
+    @PersistenceContext(unitName = "emfB")
+    private EntityManager emB;
 
-    @Transactional(readOnly = true)
     @Override
-    public List<Contact> findByFirstName(String firstName) {
-        return Lists.newArrayList(contactRepository.findByFirstName(firstName));
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Contact> findByFirstNameAndLastName(String firstName, String lastName) {
-        return Lists.newArrayList(contactRepository.findByFirstNameAndLastName(firstName, lastName));
+    public Contact save(Contact contact) {
+        Contact contactB = new Contact();
+        contactB.setFirstName(contact.getFirstName());
+        contactB.setLastName(contact.getLastName());
+        contactB.setBirthDate(contact.getBirthDate());
+        if(contact.getId() == null) {
+            emA.persist(contact);
+            emB.persist(contactB);
+        } else {
+            emA.merge(contact);
+            emB.merge(contactB);
+        }
+        return contact;
     }
 }

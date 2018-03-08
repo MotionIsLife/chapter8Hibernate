@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Service("contactSummaryService")
+/*@Service("contactSummaryService")
 @Repository
 @Transactional
 public class ContactSummaryServiceImpl implements ContactSummaryService {
@@ -24,4 +24,4 @@ public class ContactSummaryServiceImpl implements ContactSummaryService {
                 "from Contact c left join c.contactTelDetails t where t.telType='Home'", ContactSummary.class).getResultList();
         return result;
     }
-}
+}*/

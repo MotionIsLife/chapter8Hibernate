@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public class ContactSummaryUntypeImpl {
 
-    @PersistenceContext
+/*    @PersistenceContext
     private EntityManager em;
 
     @Transactional(readOnly = true)
@@ -25,6 +25,6 @@ public class ContactSummaryUntypeImpl {
             Object[] values = (Object[]) i.next();
             System.out.println(++count + ": " + values[0] + ", " + values[1] + ", " + values[2]);
         }
-    }
+    }*/
 
 }
