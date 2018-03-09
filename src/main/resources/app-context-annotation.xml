@@ -46,5 +46,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:component-scan base-package="motionIsLife" />
-    <jpa:repositories base-package="motionIsLife" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
+    <jpa:repositories base-package="motionIsLife"
+                      entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager" />
 </beans>
