@@ -5,7 +5,10 @@
     <groupId>motionIsLife</groupId>
     <artifactId>chapter8Hibernate</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>planing</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>chapter8Hibernate</name>
     <url>http://maven.apache.org</url>
